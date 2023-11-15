@@ -1,0 +1,18 @@
+.header{
+    height: 94px;
+    background-color: #1B1464;
+    color: white;
+    border: 2px solid transparent;
+    text-align: center;
+    letter-spacing: 5px;
+
+}
+.header:hover{
+    transition: all 1s ease-out;
+    background-color: #2f3542;
+    letter-spacing: 10px;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
