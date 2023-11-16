@@ -1,25 +1,24 @@
 import { Box, Button, Checkbox, Stack, Typography } from "@mui/material";
-import React from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 const DisplayedData = (props) => {
   return (
     <>
       <Stack
-        direction={{ xs: "column", sm: "column", md: "column",lg:'row' }}
+        direction={{ xs: "column", sm: "column", md: "column", lg: "row" }}
         sx={{
-    
           justifyContent: "space-between",
-          width: "50%",
-          margin: "10px auto",
-          padding:'0 20px',
+          width: "96.5%",
+          margin: "10px 0",
+          padding: "0 20px",
+          background: "white",
           boxShadow:
             "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
         }}
       >
         <Box
           sx={{
-        //   width:'50%',
+            //   width:'50%',
             display: "flex",
             justifyContent: {
               md: "space-between",
@@ -30,24 +29,44 @@ const DisplayedData = (props) => {
           }}
         >
           <Box>
-            <Checkbox />
+            <Checkbox onClick={props.handleCheck} />
           </Box>
-          <Box sx={{wordBreak:'break-word'}}>
+          <Box sx={{ wordBreak: "break-word" }}>
             <Typography variant="h5">{props.input}</Typography>
           </Box>
         </Box>
-        <Stack direction={'row'}
+        <Stack
+          direction={"row"}
           sx={{
-            textAlign:'center',
-            alignSelf:'center',
-            paddingBottom:{
-                sm:"10px",
-                xs:"10px",
-                md:"10px"
-            }
+            textAlign: "center",
+            alignSelf: "center",
+            justifyContent: "center",
+            paddingBottom: {
+              sm: "10px",
+              xs: "10px",
+              md: "10px",
+            },
+            wordBreak: "break-word",
+            // width:'100%'
           }}
         >
-          <Button variant="contained" color="secondary" sx={{marginRight:'10px'}}  >
+         <Typography
+            // key={e.id}
+            variant="p"
+            color={'error'}
+            sx={{
+              textAlign: "center",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            {props.complete}
+          </Typography> 
+          <Button
+            variant="contained"
+            color="secondary"
+            sx={{ margin: "0px 10px" }}
+          >
             <EditIcon />
           </Button>
           <Button variant="contained" color="error" onClick={props.deleteData}>
