@@ -118,7 +118,7 @@ const TextArea = (props) => {
           textAlign:'center'
         }}
       >
-        <Typography variant="h5" sx={{mt:'10px'}} >Add TODO HERE</Typography>
+        <Typography variant="h5" sx={{mt:'10px'}} >ADD TODO HERE</Typography>
         {data.map((e) => {
           return (
             <DisplayedData
