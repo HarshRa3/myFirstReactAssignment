@@ -1,19 +1,37 @@
-import { Box, Button, Checkbox,TextField, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  TextField,
+  Stack,
+  Typography,
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useContext,useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { store } from "./TextArea";
-
-// import { useState } from "react";
+// export const updateData=createContext()
 const DisplayedData = (props) => {
-  const[edit,setEdit]=useState(false)
-  const[updateInput,setUpdateInput]=useState('')
+  const [edit, setEdit] = useState(false);
+  const [updateInput, setUpdateInput] = useState("");
+  const inputRef = useRef(null);
+  const newInputRef=useRef()
+  useEffect(() => {
+    if (edit) {
+      // Focus on the input field when 'edit' is true
+      inputRef.current.focus();
+    }
+  }, [edit]);
   const allData = useContext(store);
-  const  handleEdit=()=>{
-    setEdit(!edit)
-    
-  }
+  const handleEdit = () => {
+    setUpdateInput(props.text)
+    setEdit(!edit);
+  };
+  const handleBlur = () => {
+    allData.saveEdit(props.data, updateInput);
+    setEdit(false);
+  };
   return (
     <>
       <Stack
@@ -31,7 +49,6 @@ const DisplayedData = (props) => {
       >
         <Box
           sx={{
-            //   width:'50%',
             display: "flex",
             justifyContent: {
               md: "space-between",
@@ -46,9 +63,19 @@ const DisplayedData = (props) => {
             <Checkbox onClick={props.handleCheck} />
           </Box>
           <Box sx={{ wordBreak: "break-word" }}>
-            {!edit?<Typography variant="h5">{props.text}</Typography>:<TextField 
-          label="Enter text" value={updateInput} onChange={(e)=>setUpdateInput(e.target.value)}/>}
-            {/* <Typography variant="h5">{props.text}</Typography> */}
+            {!edit ? (
+              <Typography variant="h5">{props.text}</Typography>
+            ) : (
+              <TextField
+                label="Enter text"
+                value={updateInput}
+                onBlur={handleBlur}
+                onChange={(e) => setUpdateInput(e.target.value)}
+                inputRef={inputRef}
+                ref={newInputRef}
+                
+              />
+            )}
           </Box>
         </Box>
         <Stack
@@ -90,11 +117,7 @@ const DisplayedData = (props) => {
               variant="contained"
               color="success"
               sx={{ margin: "0px 10px" }}
-              onClick={()=>{
-                allData.saveEdit(props.data, updateInput)
-                setEdit(false)
-              }}
-
+              onClick={handleBlur}
             >
               <AddIcon />
             </Button>
@@ -118,3 +141,4 @@ const DisplayedData = (props) => {
 };
 
 export default DisplayedData;
+// export {updateData}

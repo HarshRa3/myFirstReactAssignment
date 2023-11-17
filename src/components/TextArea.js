@@ -15,6 +15,7 @@ const TextArea = (props) => {
   //   const storage = JSON.parse(localStorage.getItem("Data"));
   //   setData(storage);
   // }, []);
+  // const myUpdateData=useContext(updateData)
   useEffect(() => {
     // Retrieve data from local storage
     const storedData = localStorage.getItem("Data");
@@ -79,14 +80,16 @@ const TextArea = (props) => {
       setData(() =>
         data.map((e) => {
           if (e.id === id) {
-            return { ...e, text: updatedvalue };
+            return { ...e, text: updatedvalue};
           } else {
             return e;
           }
         })
+        
       );
     } else {
-      alert("Please enter a valid value");
+      // console.log(myUpdateData.newInputRef.current.value)
+      // alert("Please enter a valid value");
     }
   };
 
