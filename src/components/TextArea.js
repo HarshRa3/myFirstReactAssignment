@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
-import { Box, Button, Stack } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DisplayedData from "./DisplayedData";
 import { v4 as uuidv4 } from "uuid";
@@ -109,15 +109,16 @@ const TextArea = (props) => {
       <div
         style={{
           height: "400px",
-          backgroundColor: "#70a1ff",
+          backgroundColor: "rgba(130, 112, 255, 0.2)",
           width: "70%",
-          margin: "auto",
+          margin: "23px auto",
           overflowX: "hidden",
           overflowY: "scroll",
-          marginTop: "10px",
           boxShadow: "rgb(38, 57, 77) 0px 20px 30px -10px",
+          textAlign:'center'
         }}
       >
+        <Typography variant="h5" sx={{mt:'10px'}} >Add TODO HERE</Typography>
         {data.map((e) => {
           return (
             <DisplayedData
@@ -132,8 +133,8 @@ const TextArea = (props) => {
           );
         })}
       </div>
-      <Box sx={{ width: "9%", margin: "10px auto" }}>
-        <Button variant="contained" onClick={clearAllText}>
+      <Box sx={{ width: "10%" , margin: "10px auto",boxShadow: 'rgb(38, 57, 77) 0px 20px 30px -10px' }}>
+        <Button variant="contained" onClick={clearAllText} sx={{width:'100%'}} >
           Clear All
         </Button>
       </Box>
