@@ -37,9 +37,9 @@ const DisplayedData = (props) => {
         direction={{ xs: "column", sm: "column", md: "column", lg: "row" }}
         sx={{
           justifyContent: "space-between",
-          width: "96.5%",
+          width: "100%",
           margin: "10px 0",
-          padding: "0 20px",
+          padding: "",
           background: "white",
           minHeight: "19%",
           boxShadow:
@@ -61,7 +61,7 @@ const DisplayedData = (props) => {
           <Box>
             <Checkbox onClick={props.handleCheck} checked={props.checkData}  />
           </Box>
-          <Box sx={{ wordBreak: "break-word" }}>
+          <Box sx={{ wordBreak: "break-word", textAlign:{xs:'right',sm:'right',md:'right',lg:'left'}, maxWidth:'500px' }}>
             {!edit ? (
               <Typography variant="h5">{props.text}</Typography>
             ) : (
@@ -129,7 +129,7 @@ const DisplayedData = (props) => {
             {props.editIcon}
           </Button> */}
 
-          <Button variant="contained" color="error" onClick={props.deleteData}>
+          <Button variant="contained" color="error" sx={{mr:{lg:'20px'}}} onClick={props.deleteData}>
             <DeleteIcon />
           </Button>
         </Stack>
