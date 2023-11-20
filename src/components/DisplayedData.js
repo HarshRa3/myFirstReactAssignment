@@ -9,14 +9,13 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { store } from "./TextArea";
 // export const updateData=createContext()
 const DisplayedData = (props) => {
   const [edit, setEdit] = useState(false);
   const [updateInput, setUpdateInput] = useState("");
   const inputRef = useRef(null);
-  const newInputRef=useRef()
   useEffect(() => {
     if (edit) {
       // Focus on the input field when 'edit' is true
@@ -29,7 +28,7 @@ const DisplayedData = (props) => {
     setEdit(!edit);
   };
   const handleBlur = () => {
-    allData.saveEdit(props.data, updateInput);
+    allData.saveEdit(props.id, updateInput);
     setEdit(false);
   };
   return (
@@ -60,7 +59,7 @@ const DisplayedData = (props) => {
           }}
         >
           <Box>
-            <Checkbox onClick={props.handleCheck} />
+            <Checkbox onClick={props.handleCheck} checked={props.checkData}  />
           </Box>
           <Box sx={{ wordBreak: "break-word" }}>
             {!edit ? (
@@ -72,7 +71,6 @@ const DisplayedData = (props) => {
                 onBlur={handleBlur}
                 onChange={(e) => setUpdateInput(e.target.value)}
                 inputRef={inputRef}
-                ref={newInputRef}
                 
               />
             )}
@@ -94,8 +92,8 @@ const DisplayedData = (props) => {
         >
           <Typography
             variant="p"
-            color={"error"}
             sx={{
+              color:'green',
               textAlign: "center",
               display: "flex",
               alignItems: "center",
@@ -136,6 +134,7 @@ const DisplayedData = (props) => {
           </Button>
         </Stack>
       </Stack>
+      
     </>
   );
 };
