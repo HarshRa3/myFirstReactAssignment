@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import { Box, Button, Stack } from "@mui/material";
 import { store } from "./TextArea";
+import FilterButton from "./FilterButton";
 
 const Filter = () => {
-
   const allData = useContext(store);
   const { setTodotype } = useContext(store);
   const [selectedFilter, setSelectedFilter] = useState("all");
@@ -12,46 +12,49 @@ const Filter = () => {
     setTodotype(selectedType);
     setSelectedFilter(selectedType);
   };
-// console.log(allData.data.length)
+  const FilterBtnObj = [
+    {
+      btnTitle: "All",
+      selectedFilter: selectedFilter === "all" ? "secondary" : "primary",
+      todoFilterPage: () => todoFilterPage("all"),
+    },
+    {
+      btnTitle: "Completed",
+      selectedFilter: selectedFilter === "completed" ? "secondary" : "primary",
+      todoFilterPage: () => todoFilterPage("completed"),
+    },
+    {
+      btnTitle: "Incompleted",
+      selectedFilter:
+        selectedFilter === "incompleted" ? "secondary" : "primary",
+      todoFilterPage: () => todoFilterPage("incompleted"),
+    },
+  ];
   return (
     <Box>
-      {allData.data.length>0 && 
-    <Stack
-      direction={{ sm: "column", xs: "column", md: "column", lg: "row" }}
-      spacing={2}
-      sx={{
-        justifyContent: "space-between",
-        width: "50%",
-        margin: "20px auto",
-        alignItems: "center",
-      }}
-    >
-      <Button
-        variant="contained"
-        color={selectedFilter === "all" ? "secondary" : "primary"}
-        onClick={() => todoFilterPage("all")}
-        sx={{ width: {sm:'60%',xs:'80%',md:'40%',lg:'23%'}, height: "10%", fontSize: "15px",  boxShadow: "rgb(38, 57, 77) 0px 20px 30px -10px" }}
-      >
-        All
-      </Button>
-      <Button
-        variant="contained"
-        color={selectedFilter === "completed" ? "secondary" : "primary"}
-        onClick={() => todoFilterPage("completed")}
-        sx={{ width: {sm:'60%',xs:'80%',md:'40%',lg:'23%'}, height: "10%", fontSize: "15px",  boxShadow: "rgb(38, 57, 77) 0px 20px 30px -10px" }}
-      >
-        Completed 
-      </Button>
-      <Button
-        variant="contained"
-        color={selectedFilter === "incompleted" ? "secondary" : "primary"}
-        onClick={() => todoFilterPage("incompleted")}
-        sx={{ width: {sm:'60%',xs:'80%',md:'40%',lg:'23%'}, height: "10%", fontSize: "15px",  boxShadow: "rgb(38, 57, 77) 0px 20px 30px -10px" }}
-      >
-        Incompleted 
-      </Button>
-    </Stack>}
-   
+      {allData.data.length > 0 && (
+        <Stack
+          direction={{ sm: "column", xs: "column", md: "column", lg: "row" }}
+          spacing={2}
+          sx={{
+            justifyContent: "space-between",
+            width: "50%",
+            margin: "20px auto",
+            alignItems: "center",
+          }}
+        >
+          {FilterBtnObj.map((e) => {
+            return (
+              <FilterButton
+                key={e.btnTitle}
+                btnTitle={e.btnTitle}
+                selectedFilter={e.selectedFilter}
+                todoFilterPage={e.todoFilterPage}
+              />
+            );
+          })}
+        </Stack>
+      )}
     </Box>
   );
 };

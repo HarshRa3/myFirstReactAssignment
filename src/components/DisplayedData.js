@@ -12,7 +12,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useContext, useEffect, useRef, useState } from "react";
 import { store } from "./TextArea";
 // export const updateData=createContext()
-const DisplayedData = (props) => {
+const DisplayedData = ({text,id,handleCheck,checkData,complete,deleteData}) => {
   const [edit, setEdit] = useState(false);
   const [updateInput, setUpdateInput] = useState("");
   const inputRef = useRef(null);
@@ -24,11 +24,11 @@ const DisplayedData = (props) => {
   }, [edit]);
   const allData = useContext(store);
   const handleEdit = () => {
-    setUpdateInput(props.text)
+    setUpdateInput(text);
     setEdit(!edit);
   };
   const handleBlur = () => {
-    allData.saveEdit(props.id, updateInput);
+    allData.saveEdit(id, updateInput);
     setEdit(false);
   };
   return (
@@ -59,11 +59,17 @@ const DisplayedData = (props) => {
           }}
         >
           <Box>
-            <Checkbox onClick={props.handleCheck} checked={props.checkData}  />
+            <Checkbox onClick={handleCheck} checked={checkData} />
           </Box>
-          <Box sx={{ wordBreak: "break-word", textAlign:{xs:'right',sm:'right',md:'right',lg:'left'}, maxWidth:'500px' }}>
+          <Box
+            sx={{
+              wordBreak: "break-word",
+              textAlign: { xs: "right", sm: "right", md: "right", lg: "left" },
+              maxWidth: "500px",
+            }}
+          >
             {!edit ? (
-              <Typography variant="h5">{props.text}</Typography>
+              <Typography variant="h5">{text}</Typography>
             ) : (
               <TextField
                 label="Enter text"
@@ -71,7 +77,6 @@ const DisplayedData = (props) => {
                 onBlur={handleBlur}
                 onChange={(e) => setUpdateInput(e.target.value)}
                 inputRef={inputRef}
-                
               />
             )}
           </Box>
@@ -82,24 +87,20 @@ const DisplayedData = (props) => {
             textAlign: "center",
             alignSelf: "center",
             justifyContent: "center",
-            paddingBottom: {
-              sm: "10px",
-              xs: "10px",
-              md: "10px",
-            },
+            paddingBottom: "10px",
             wordBreak: "break-word",
           }}
         >
           <Typography
             variant="p"
             sx={{
-              color:'green',
+              color: "green",
               textAlign: "center",
               display: "flex",
               alignItems: "center",
             }}
           >
-            {props.complete}
+            {complete}
           </Typography>
           {!edit ? (
             <Button
@@ -120,21 +121,17 @@ const DisplayedData = (props) => {
               <AddIcon />
             </Button>
           )}
-          {/* <Button
-            variant="contained"
-            color="secondary"
-            sx={{ margin: "0px 10px" }}
-            onClick={props.handleEdit}
-          >
-            {props.editIcon}
-          </Button> */}
 
-          <Button variant="contained" color="error" sx={{mr:{lg:'20px'}}} onClick={props.deleteData}>
+          <Button
+            variant="contained"
+            color="error"
+            sx={{ mr: { lg: "20px" } }}
+            onClick={deleteData}
+          >
             <DeleteIcon />
           </Button>
         </Stack>
       </Stack>
-      
     </>
   );
 };
