@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
 
-const FilterButton = (selectedFilter,todoFilterPage,btnTitle) => {
+const FilterButton = ({selectedFilter,todoFilterPage,btnTitle}) => {
   // const [selectedFilter, setSelectedFilter] = useState("all");
   return (
     <Button

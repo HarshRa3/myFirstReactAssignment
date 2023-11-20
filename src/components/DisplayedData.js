@@ -121,6 +121,14 @@ const DisplayedData = ({text,id,handleCheck,checkData,complete,deleteData}) => {
               <AddIcon />
             </Button>
           )}
+          {/* <Button
+            variant="contained"
+            color="secondary"
+            sx={{ margin: "0px 10px" }}
+            onClick={handleEdit}
+          >
+            {editIcon}
+          </Button> */}
 
           <Button
             variant="contained"
